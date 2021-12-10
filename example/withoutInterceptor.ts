@@ -7,15 +7,17 @@ const socksProxyAgents = genSocksProxyAgents([9050, 9052, 9054])
 
 async function originalIp() {
   const response = await axios.get(url)
-  console.log('Original IP: ', response.data)
+  console.info('Original IP: ', response.data)
 }
 
 async function torIp(httpsAgent: SocksProxyAgent) {
   try {
     const response = await axios.get(url, { httpsAgent })
-    console.log('Tor IP: ', response.data)
-  } catch (err: any) {
-    console.log(err.message)
+    console.info('Tor IP: ', response.data)
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.info(err.message)
+    }
   }
 }
 
