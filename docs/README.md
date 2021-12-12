@@ -38,4 +38,4 @@ axios.get(url, { headers: { tor: 'true' } })
 
 #### Defined in
 
-[index.ts:32](https://github.com/BlackLacost/axios-tor-interceptor/blob/f0db68d/src/index.ts#L32)
+interceptor.ts:32
