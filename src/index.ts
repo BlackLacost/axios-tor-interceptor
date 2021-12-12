@@ -1,7 +1,7 @@
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { genSocksProxyAgents } from './genSocksProxyAgents'
 
-export const TorInterceptor = (
+export const torInterceptor = (
   instance: AxiosInstance,
   socksPorts: number[],
 ) => {

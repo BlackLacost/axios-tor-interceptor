@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { TorInterceptor } from '../src'
+import { torInterceptor } from '../src'
 
 const socksPorts = [9050, 9052, 9054]
 
@@ -7,7 +7,7 @@ const api = axios.create({
   baseURL: 'https://api.ipify.org/',
   timeout: 10000,
 })
-TorInterceptor(api, socksPorts)
+torInterceptor(api, socksPorts)
 
 async function originalIp() {
   const response = await api.get('/')
