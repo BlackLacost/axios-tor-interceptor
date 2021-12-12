@@ -1,5 +1,5 @@
-import SocksProxyAgent from 'socks-proxy-agent/dist/agent'
-import { genSocksProxyAgents } from '../genSocksProxyAgents'
+import { SocksProxyAgent } from 'socks-proxy-agent'
+import { genSocksProxyAgents } from './genSocksProxyAgents'
 
 describe('genSocksProxyAgents', () => {
   it.each`
