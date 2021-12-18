@@ -1,10 +1,7 @@
-import {
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-  AxiosStatic,
-} from 'axios'
+import { AxiosInstance, AxiosStatic } from 'axios'
 import { genSocksProxyAgents } from './genSocksProxyAgents'
+import { requestInterceptor } from './request.interceptor'
+import { responseInterceptor } from './response.interceptor'
 
 /**
  * The torInterceptor
@@ -34,23 +31,6 @@ export const torInterceptor = (
   socksPorts: number[],
 ) => {
   const proxyAgents = genSocksProxyAgents(socksPorts)
-
-  axios.interceptors.request.use((request: AxiosRequestConfig) => {
-    if (request.headers?.tor) {
-      request.httpsAgent = proxyAgents.next().value
-    }
-    return request
-  })
-
-  axios.interceptors.response.use((response: AxiosResponse) => {
-    if (response.config.httpsAgent) {
-      delete response.config.httpsAgent
-    }
-
-    if (response.config.headers?.tor) {
-      delete response.config.headers.tor
-    }
-    return response
-  })
+  axios.interceptors.request.use(requestInterceptor(proxyAgents))
+  axios.interceptors.response.use(responseInterceptor)
 }
-
