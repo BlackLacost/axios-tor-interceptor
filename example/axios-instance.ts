@@ -7,7 +7,7 @@ const api = axios.create({
   baseURL: 'https://api.ipify.org/',
   timeout: 10000,
 })
-torInterceptor(api, socksPorts)
+torInterceptor(api, socksPorts, 'info')
 
 async function originalIp() {
   const response = await api.get('/')

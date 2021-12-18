@@ -3,10 +3,17 @@ import {
   AxiosRequestConfig,
   AxiosRequestTransformer,
 } from 'axios'
+import { Logger } from 'pino'
 import SocksProxyAgent from 'socks-proxy-agent/dist/agent'
 
 import { genSocksProxyAgents } from './genSocksProxyAgents'
 import { requestInterceptor } from './request.interceptor'
+
+jest.mock('./logging', () => ({
+  log: {
+    info: jest.fn(),
+  },
+}))
 
 describe('request interceptor', () => {
   let interceptor: any
