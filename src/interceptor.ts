@@ -1,4 +1,5 @@
 import { AxiosInstance, AxiosStatic } from 'axios'
+import { createAxiosInstance } from './create-axios-instance'
 import { genSocksProxyAgents } from './genSocksProxyAgents'
 import { initLog, type LogLevel } from './logging'
 import { requestInterceptor } from './request.interceptor'
@@ -34,6 +35,9 @@ export const torInterceptor = (
   logLevel: LogLevel = 'info',
 ) => {
   initLog(logLevel)
+
+  const axiosInstance = createAxiosInstance(axios)
+
   const proxyAgents = genSocksProxyAgents(socksPorts)
   axios.interceptors.request.use(requestInterceptor(proxyAgents))
   axios.interceptors.response.use(responseInterceptor)
