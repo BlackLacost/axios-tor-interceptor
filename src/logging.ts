@@ -5,9 +5,10 @@ let logger: Logger | undefined
 
 /** Logger level.
  * `silent` disable logger.
- * `info` show all logs. Default `info`
+ * `error` show only errror log.
+ * `info` show all logs. Default `info`.
  */
-export type LogLevel = 'silent' | 'info'
+export type LogLevel = 'silent' | 'info' | 'error'
 
 export const initLog = (logLevel: LogLevel) => {
   logger = pino({
@@ -21,5 +22,8 @@ export const initLog = (logLevel: LogLevel) => {
 export const log = {
   info: (message: string, properties: any): void => {
     return logger?.child(properties).info(message)
+  },
+  error: (message: string, properties: any): void => {
+    return logger?.child(properties).error(message)
   },
 }
