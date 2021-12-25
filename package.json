@@ -12,7 +12,7 @@
     "clean": "rimraf lib",
     "build": "npm run clean && tsc",
     "format": "prettier --write \"src/**/*.ts\" \"lib/**/*.js\"",
-    "lint": "eslint src",
+    "lint": "eslint src example",
     "prepare": "npm run build",
     "prepublishOnly": "jest && npm run lint",
     "preversion": "npm run lint",

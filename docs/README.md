@@ -4,15 +4,16 @@
 
 ### LogLevel
 
-Ƭ **LogLevel**: ``"silent"`` \| ``"info"``
+Ƭ **LogLevel**: ``"silent"`` \| ``"info"`` \| ``"error"``
 
 Logger level.
 `silent` disable logger.
-`info` show all logs. Default `info`
+`error` show only errror log.
+`info` show all logs. Default `info`.
 
 #### Defined in
 
-[logging.ts:10](https://github.com/BlackLacost/axios-tor-interceptor/blob/23906a7/src/logging.ts#L10)
+[logging.ts:10](https://github.com/BlackLacost/axios-tor-interceptor/blob/e739813/src/logging.ts#L10)
 
 ## Functions
 
@@ -53,4 +54,4 @@ axios.get(url, { headers: { tor: 'true' } })
 
 #### Defined in
 
-[interceptor.ts:31](https://github.com/BlackLacost/axios-tor-interceptor/blob/23906a7/src/interceptor.ts#L31)
+[interceptor.ts:33](https://github.com/BlackLacost/axios-tor-interceptor/blob/e739813/src/interceptor.ts#L33)

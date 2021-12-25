@@ -23,10 +23,12 @@ async function torIp(httpsAgent: SocksProxyAgent) {
 
 async function main() {
   await originalIp()
-  await torIp(socksProxyAgents.next().value)
-  await torIp(socksProxyAgents.next().value)
-  await torIp(socksProxyAgents.next().value)
-  await torIp(socksProxyAgents.next().value)
+  await torIp(socksProxyAgents.next().value.socksProxyAgent)
+  await torIp(socksProxyAgents.next().value.socksProxyAgent)
+  await torIp(socksProxyAgents.next().value.socksProxyAgent)
+  await torIp(socksProxyAgents.next().value.socksProxyAgent)
 }
 
 main()
+  .then()
+  .catch((err) => console.error(err))

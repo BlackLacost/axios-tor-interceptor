@@ -1,18 +1,22 @@
-import { AxiosInterceptorManager, AxiosRequestConfig } from 'axios'
-import { Logger } from 'pino'
-import { SocksProxyAgent } from 'socks-proxy-agent'
+import { AxiosRequestConfig } from 'axios'
+import { type GenSocksProxyAgents } from './genSocksProxyAgents'
 import { log } from './logging'
 
+export type RequestInterceptor = (
+  request: AxiosRequestConfig,
+) => AxiosRequestConfig
+
 export const requestInterceptor =
-  (proxyAgents: Generator<SocksProxyAgent>) =>
-  (request: AxiosRequestConfig) => {
+  (proxyAgents: GenSocksProxyAgents) =>
+  (request: AxiosRequestConfig): AxiosRequestConfig => {
     if (request.headers?.tor) {
-      const httpsAgent = proxyAgents.next().value
-      request.httpsAgent = httpsAgent
+      const { socksProxyAgent, socksPort } = proxyAgents.next().value
+      request.httpsAgent = socksProxyAgent
+      request.metadata = { socksPort }
       log.info('tor request interceptor', {
         request: {
           url: request.url,
-          socksPort: request.httpsAgent.proxy.port,
+          socksPort: socksPort,
         },
       })
     }

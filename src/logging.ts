@@ -1,4 +1,3 @@
-import { AxiosRequestConfig } from 'axios'
 import { Logger, pino } from 'pino'
 
 let logger: Logger | undefined
@@ -20,10 +19,10 @@ export const initLog = (logLevel: LogLevel) => {
 }
 
 export const log = {
-  info: (message: string, properties: any): void => {
+  info: <T>(message: string, properties: T): void => {
     return logger?.child(properties).info(message)
   },
-  error: (message: string, properties: any): void => {
+  error: <T>(message: string, properties: T): void => {
     return logger?.child(properties).error(message)
   },
 }

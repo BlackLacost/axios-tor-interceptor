@@ -1,13 +1,5 @@
-import {
-  AxiosInterceptorManager,
-  AxiosRequestConfig,
-  AxiosRequestTransformer,
-} from 'axios'
-import { Logger } from 'pino'
-import SocksProxyAgent from 'socks-proxy-agent/dist/agent'
-
 import { genSocksProxyAgents } from './genSocksProxyAgents'
-import { requestInterceptor } from './request.interceptor'
+import { RequestInterceptor, requestInterceptor } from './request.interceptor'
 
 jest.mock('./logging', () => ({
   log: {
@@ -16,32 +8,29 @@ jest.mock('./logging', () => ({
 }))
 
 describe('request interceptor', () => {
-  let interceptor: any
+  let interceptor: RequestInterceptor
 
   beforeEach(() => {
-    const socksPorts: Generator<SocksProxyAgent> = genSocksProxyAgents([
-      9050, 9052,
-    ])
-    interceptor = requestInterceptor(socksPorts)
+    interceptor = requestInterceptor(genSocksProxyAgents([9050, 9052]))
   })
 
-  it('each request uses the specified ports in an infinite sequential loop', async () => {
+  it('each request uses the specified ports in an infinite sequential loop', () => {
     // Каждый запрос использует указанные порты в бесконечном последовательном цикле
     const EXPECTED_PORTS = [9050, 9052, 9050]
     EXPECTED_PORTS.forEach((expectedPort) => {
-      const config = interceptor({ headers: { tor: 'true' } })
+      const { metadata } = interceptor({ headers: { tor: 'true' } })
 
-      expect(config.httpsAgent.proxy.port).toBe(expectedPort)
+      expect(metadata?.socksPort).toBe(expectedPort)
     })
   })
 
-  it('if not header tor=true httpsAgent is undefined', async () => {
+  it('if not header tor=true httpsAgent is undefined', () => {
     const config = interceptor({ headers: { some: 'headers' } })
 
     expect(config.httpsAgent).toBeUndefined()
   })
 
-  it('if not header httpsAgent is undefined', async () => {
+  it('if not header httpsAgent is undefined', () => {
     const config = interceptor({})
 
     expect(config.httpsAgent).toBeUndefined()

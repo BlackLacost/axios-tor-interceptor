@@ -5,7 +5,6 @@ module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    tsconfigRootDir: __dirname, // tsconfigRootDir: __dirname, ???
     project: ['./tsconfig.json'],
   },
   plugins: ['@typescript-eslint', 'jest', 'import'],
@@ -20,5 +19,6 @@ module.exports = {
   ],
   rules: {
     'jest/no-identical-title': 'error',
+    'jest/unbound-method': 'off',
   },
 }
