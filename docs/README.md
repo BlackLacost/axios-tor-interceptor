@@ -13,7 +13,7 @@ Logger level.
 
 #### Defined in
 
-[logging.ts:10](https://github.com/BlackLacost/axios-tor-interceptor/blob/e739813/src/logging.ts#L10)
+[logging.ts:10](https://github.com/BlackLacost/axios-tor-interceptor/blob/29d5cf4/src/logging.ts#L10)
 
 ## Functions
 
@@ -54,4 +54,4 @@ axios.get(url, { headers: { tor: 'true' } })
 
 #### Defined in
 
-[interceptor.ts:33](https://github.com/BlackLacost/axios-tor-interceptor/blob/e739813/src/interceptor.ts#L33)
+[interceptor.ts:33](https://github.com/BlackLacost/axios-tor-interceptor/blob/29d5cf4/src/interceptor.ts#L33)
